@@ -17,7 +17,7 @@ pipeline {
                     npm ping
                     npm config get registry
                     npm config set strict-ssl false
-                    npm install
+                    npm ci
                     npm run build
                     ls -la
                 '''
