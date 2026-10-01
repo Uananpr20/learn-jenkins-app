@@ -16,6 +16,7 @@ pipeline {
                     npm --version
                     npm ping
                     npm config get registry
+                    npm config set strict-ssl false
                     npm install
                     npm run build
                     ls -la
