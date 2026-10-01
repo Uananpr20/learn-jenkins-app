@@ -16,7 +16,7 @@ pipeline {
                     npm --version
                     npm ping
                     npm config get registry
-                    npm ci
+                    npm install
                     npm run build
                     ls -la
                 '''
