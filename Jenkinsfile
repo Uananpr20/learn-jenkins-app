@@ -3,7 +3,13 @@ pipeline {
             docker {
                 image 'node:18-alpine'
                 reuseNode true
+                args '-v /var/cache/jenkins-npm:/tmp/.npm'
             }
+        }
+
+        environment{
+            CI = 'true'
+            npm_config_cache = '/tmp/.npm'
         }
 
     stages {
@@ -13,8 +19,6 @@ pipeline {
                     ls -la
                     node --version
                     npm --version
-                    npm ping
-                    npm config get registry
                     npm config set strict-ssl false
                     npm ci
                     npm run build
@@ -26,10 +30,6 @@ pipeline {
         stage('Staging') {
             steps {
                 sh'''
-                    node --version
-                    npm --version
-                    npm config set strict-ssl false
-                    npm ci
                     npm test
                 '''
             }
