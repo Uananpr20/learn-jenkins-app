@@ -26,13 +26,11 @@ pipeline {
         stage('Staging') {
             steps {
                 sh'''
-                    ls -la
                     node --version
                     npm --version
                     npm config set strict-ssl false
                     npm ci
                     npm test
-                    ls -la
                 '''
             }
         }
