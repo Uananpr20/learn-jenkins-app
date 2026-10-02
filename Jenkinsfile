@@ -3,14 +3,9 @@ pipeline {
             docker {
                 image 'node:18-alpine'
                 reuseNode true
-                args '-v /var/cache/jenkins-npm:/tmp/.npm'
             }
         }
 
-        environment{
-            CI = 'true'
-            npm_config_cache = '/tmp/.npm'
-        }
 
     stages {
         stage('Build') {    
