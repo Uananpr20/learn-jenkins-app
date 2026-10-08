@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Test stage') {
+        stage('Test') {
             steps {
                 sh'''
                     test -f build/index.html  && echo "file exist"
