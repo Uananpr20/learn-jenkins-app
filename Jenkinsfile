@@ -1,5 +1,5 @@
 pipeline {
-   
+   agent any
 
     stages {
         /*stage('Build') {    
@@ -18,14 +18,14 @@ pipeline {
 
         stage('Test') {
 
-              agent {    
-            docker {
-                image 'node:18-alpine'
-                reuseNode true
+            agent {    
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
             }
         }
             steps {
-                sh'''
+                sh '''
                     test -f build/index.html  && echo "file exist"
                     npm test
                 '''
@@ -36,9 +36,9 @@ pipeline {
         stage('E2E') {
 
             agent {    
-            docker {
-                image 'mcr.microsoft.com/playwright:v1.64.1-noble'
-                reuseNode true
+                docker {
+                        image 'mcr.microsoft.com/playwright:v1.64.1-noble'
+                        reuseNode true
             }
         }
 
