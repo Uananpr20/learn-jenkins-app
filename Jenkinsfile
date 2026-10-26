@@ -8,7 +8,7 @@ pipeline {
 
 
     stages {
-        stage('Build') {    
+        /*stage('Build') {    
             steps {
                 sh'''
                     ls -la
@@ -20,13 +20,32 @@ pipeline {
                     ls -la
                 '''
             }
-        }
+        }*/
 
         stage('Test') {
             steps {
                 sh'''
                     test -f build/index.html  && echo "file exist"
                     npm test
+                '''
+            }
+        }
+
+
+        stage('E2E') {
+
+            agent {    
+            docker {
+                image 'mcr.microsoft.com/playwright:v1.64.1-noble'
+                reuseNode true
+            }
+        }
+
+            steps {
+                sh'''
+                    npm install -g serve
+                    serve -s build
+                    npx playwright test
                 '''
             }
         }
@@ -38,7 +57,5 @@ pipeline {
                 junit 'test-results/junit.xml'
         }
     }
-
-
 
 }
