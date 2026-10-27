@@ -26,7 +26,7 @@ pipeline {
         }
             steps {
                 sh '''
-                    test -f build/index.html  && echo "file exist"
+                    test -f build/index.html  && echo "file exist I think"
                     npm test
                 '''
             }
